@@ -1,0 +1,21 @@
+<div class="loading-text" *ngIf="loading">
+  <div>
+    <strong
+      >Harap Tunggu <span class="showMe1">.</span>
+      <span class="showMe2">.</span> <span class="showMe3">.</span>
+    </strong>
+  </div>
+</div>
+<nav
+  class="navbar navbar-expand-md navbar-dark fixed-top bg-dark"
+  [class.lightbox]="loading"
+>
+  <div class="d-flex justify-content-center container">
+    <h2 class="text-white">Master Karyawan</h2>
+  </div>
+</nav>
+<main role="main" [class.lightbox]="loading">
+  <div class="animated fadeIn container-fluid main-class">
+    <router-outlet></router-outlet>
+  </div>
+</main>

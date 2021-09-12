@@ -1,0 +1,185 @@
+<div class="card">
+  <div class="card-header">
+    <h4 *ngIf="!isEdit">Add Data Karyawan</h4>
+    <h4 *ngIf="isEdit">Edit Data Karyawan</h4>
+  </div>
+  <div class="card-body">
+    <form action="post" #form="ngForm" (ngSubmit)="submit()">
+      <div class="row my-3">
+        <label class="col-md-3 col-form-label" for="name_karyawan">Nama</label>
+        <div class="col-md-4">
+          <input
+            required
+            class="form-control"
+            [ngClass]="{
+              'is-invalid':
+                (form.submitted || nama_karyawan.touched) &&
+                nama_karyawan.invalid
+            }"
+            [(ngModel)]="employee.name"
+            type="text"
+            name="nama_karyawan"
+            id="nama_karyawan"
+            #nama_karyawan="ngModel"
+            placeholder="Masukkan Nama"
+          />
+          <div
+            *ngIf="
+              (form.submitted || nama_karyawan.touched) && nama_karyawan.invalid
+            "
+            class="invalid-feedback"
+          >
+            Harap Masukkan Nama
+          </div>
+        </div>
+      </div>
+
+      <div class="row my-3">
+        <label class="col-md-3 col-form-label" for="birthDate"
+          >Tanggal Lahir</label
+        >
+        <div class="col-md-4">
+          <input
+            required
+            bsDatepicker
+            [ngClass]="{
+              'is-invalid':
+                (form.submitted || birthDate.touched) && birthDate.invalid
+            }"
+            [bsConfig]="bsConfig"
+            class="form-control"
+            [(ngModel)]="employee.birthDate"
+            type="text"
+            name="birthDate"
+            id="birthDate"
+            #birthDate="ngModel"
+            placeholder="Masukkan Tanggal Lahir (1 Januari 1970)"
+          />
+          <div
+            *ngIf="(form.submitted || birthDate.touched) && birthDate.invalid"
+            class="invalid-feedback"
+          >
+            Harap Masukkan Tanggal Lahir
+          </div>
+        </div>
+      </div>
+
+      <div class="row my-3">
+        <label class="col-md-3 col-form-label" for="idJabatan">Jabatan</label>
+        <div class="col-md-4">
+          <select
+            required
+            class="form-control"
+            name="idJabatan"
+            id="idJabatan"
+            [ngClass]="{
+              'is-invalid':
+                (form.submitted || idJabatan.touched) && idJabatan.invalid
+            }"
+            [(ngModel)]="employee.idJabatan"
+            #idJabatan="ngModel"
+          >
+            <option [ngValue]="null">Pilih Jabatan</option>
+            <option
+              *ngFor="let item of employee.positionList"
+              [ngValue]="item.id"
+            >
+              {{ item.name }}
+            </option>
+          </select>
+          <div
+            *ngIf="(form.submitted || idJabatan.touched) && idJabatan.invalid"
+            class="invalid-feedback"
+          >
+            Harap Pilih Jabatan
+          </div>
+        </div>
+      </div>
+
+      <div class="row my-3">
+        <label class="col-md-3 col-form-label" for="nip">NIP</label>
+        <div class="col-md-4">
+          <input
+            numeric
+            [length]="11"
+            required
+            class="form-control"
+            [(ngModel)]="employee.nip"
+            [ngClass]="{
+              'is-invalid': (form.submitted || nip.touched) && nip.invalid
+            }"
+            type="text"
+            name="nip"
+            id="nip"
+            #nip="ngModel"
+            placeholder="Masukkan NIP"
+          />
+          <div
+            *ngIf="(form.submitted || nip.touched) && nip.invalid"
+            class="invalid-feedback"
+          >
+            Harap Masukkan NIP
+          </div>
+        </div>
+      </div>
+
+      <div class="row my-3">
+        <label class="col-md-3 col-form-label">Jenis Kelamin</label>
+        <div class="col-md-4">
+          <div class="form-check form-check-inline mr-2">
+            <input
+              required
+              [ngClass]="{
+                'is-invalid':
+                  (form.submitted || gender.touched) && gender.invalid
+              }"
+              class="form-check-input"
+              type="radio"
+              name="gender"
+              id="gender1"
+              [(ngModel)]="employee.gender"
+              [value]="1"
+              #gender="ngModel"
+            />
+            <label class="form-check-label" for="gender1">Pria</label>
+          </div>
+          <div class="form-check form-check-inline mr-2">
+            <input
+              [ngClass]="{
+                'is-invalid':
+                  (form.submitted || gender.touched) && gender.invalid
+              }"
+              required
+              class="form-check-input"
+              type="radio"
+              name="gender"
+              id="gender2"
+              [(ngModel)]="employee.gender"
+              [value]="2"
+              #gender="ngModel"
+            />
+            <label class="form-check-label" for="gender2">Wanita</label>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div class="container">
+          <div class="row">
+            <div class="col align-self-start text-end">
+              <button
+                class="btn btn-danger"
+                type="button"
+                (click)="this.router.navigate(['karyawanindex'])"
+              >
+                Kembali
+              </button>
+            </div>
+            <div class="col align-self-center">
+              <button class="btn btn-success" type="submit">Simpan</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

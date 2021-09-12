@@ -1,0 +1,52 @@
+<div class="card">
+  <div class="card-header">
+    <h4>List Karyawan</h4>
+  </div>
+  <div class="card-body">
+    <button
+      class="btn btn-success mb-2"
+      (click)="this.router.navigate(['karyawaneditadd'])"
+    >
+      <b>Tambah</b>
+    </button>
+    <div class="form-control">
+      <table class="table table-bordered table-striped text-center">
+        <!-- datatable
+        [dtOptions]="dtOptions"
+        [dtTrigger]="dtTrigger" -->
+        <thead class="thead-light">
+          <th>No</th>
+          <th>Name</th>
+          <th>Tanggal Lahir</th>
+          <th>Jabatan</th>
+          <th>NIP</th>
+          <th>Jenis Kelamin</th>
+          <th>Aksi</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of employeeMaster; let i = index">
+            <td>{{ i + 1 }}</td>
+            <td>{{ data.name }}</td>
+            <td>{{ data.birthDate | date: "d MMMM yyyy" }}</td>
+            <td>{{ data.jabatan }}</td>
+            <td>{{ data.nip }}</td>
+            <td>{{ data.gender == 1 ? "Pria" : "Wanita" }}</td>
+            <td>
+              <button
+                class="btn btn-primary mx-1"
+                (click)="editEmployee(data.id)"
+              >
+                <fa-icon [icon]="faPenSquare"></fa-icon></button
+              ><button
+                class="btn btn-danger mx-1"
+                (click)="openDialog(data.id)"
+              >
+                <fa-icon [icon]="faMinusSquare"></fa-icon>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
